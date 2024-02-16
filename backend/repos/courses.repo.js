@@ -1,5 +1,5 @@
 /**
- * course.repo.js
+ * courses.repo.js
  *
  * Directly interacts with the database; specifically the
  * course collection. Performs CRUD operations and returns

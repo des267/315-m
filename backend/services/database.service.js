@@ -9,12 +9,12 @@
 
 import mongoose from "mongoose";
 
-const localUrl = "localhost:3000/"
+const localUrl = "mongodb://localhost:27017/315M"
 mongoose.set('strictQuery', true);
 
 const connectDB = async () => {
 	try {
-		await mongoose.connect(process.env.DATABASE_URL || localUrl, {dbName: "315M"});
+		await mongoose.connect(localUrl);
 		console.log("Connected to database");
 	} catch (e) {
 		console.log("Could not connect to database");

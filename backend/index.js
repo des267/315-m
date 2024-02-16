@@ -11,8 +11,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import connectDB from "./services/database.service.js";
-import studentRoute from "./routes/student.route.js";
-import courseRoute from "./routes/course.route.js";
+import studentRoute from "./routes/students.route.js";
+import courseRoute from "./routes/courses.route.js";
+import homeRoute from "./routes/home.route.js";
 
 const app = express();
 const port = 3000;
@@ -27,8 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // Routes
-app.use("/student", studentRoute);
-app.use("/course", courseRoute);
+app.use("/", homeRoute);
+app.use("/students", studentRoute);
+app.use("/courses", courseRoute);
 
 // Configure listening
 app.listen(port, () => {

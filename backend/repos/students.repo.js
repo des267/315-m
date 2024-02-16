@@ -1,5 +1,5 @@
 /**
- * student.repo.js
+ * students.repo.js
  *
  * Directly interacts with the database; specifically the
  * student collection. Performs CRUD operations and returns

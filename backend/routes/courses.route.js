@@ -1,5 +1,5 @@
 /**
- * course.route.js
+ * courses.route.js
  *
  * Contains all the routes to access the courses
  * in the database.
@@ -9,7 +9,7 @@
  */
 
 import express from "express";
-import {createCourse, deleteCourse, getCourse, getCourses, updateCourse} from "../controllers/course.controller.js";
+import {createCourse, deleteCourse, getCourse, getCourses, updateCourse} from "../controllers/courses.controller.js";
 
 const router = express.Router();
 

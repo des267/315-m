@@ -1,5 +1,5 @@
 /**
- * student.controller.js
+ * students.controller.js
  *
  * Contains the controller functions for sending the
  * students from the database accessed via the repo
@@ -14,7 +14,7 @@ import {
 	deleteStudentFromRepo,
 	getStudentsFromRepo,
 	updateStudentInRepo
-} from "../repos/student.repo.js";
+} from "../repos/students.repo.js";
 
 export const getStudents = async (req, res, next) => {
 	try {
@@ -65,9 +65,9 @@ export const deleteStudent = async (req, res, next) => {
 }
 
 export const createStudent = async (req, res, next) => {
-	const body = req;
+	const {body} = req;
 	try {
-		const student = await createStudentInRepo({body});
+		const student = await createStudentInRepo(body);
 		console.log("New Student:\n", student);
 		res.status(200).send(student);
 	} catch (e) {

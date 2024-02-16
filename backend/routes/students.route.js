@@ -1,5 +1,5 @@
 /**
- * student.route.js
+ * students.route.js
  *
  * Contains all the routes to access the students from
  * the database.
@@ -15,7 +15,7 @@ import {
 	getStudent,
 	getStudents,
 	updateStudent
-} from "../controllers/student.controller.js";
+} from "../controllers/students.controller.js";
 
 const router = express.Router();
 

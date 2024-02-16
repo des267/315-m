@@ -1,5 +1,5 @@
 /**
- * course.controller.js
+ * courses.controller.js
  *
  * Contains the controller functions for returning
  * the courses retrieved from the database via the
@@ -13,7 +13,7 @@ import {
 	deleteCourseFromRepo,
 	getCoursesFromRepo,
 	updateCourseInRepo
-} from "../repos/course.repo.js";
+} from "../repos/courses.repo.js";
 
 
 export const getCourses = async (req, res, next) => {
@@ -65,9 +65,9 @@ export const deleteCourse = async (req, res, next) => {
 }
 
 export const createCourse = async (req, res, next) => {
-	const body = req;
+	const {body} = req;
 	try {
-		const course = await createCourseInRepo({body});
+		const course = await createCourseInRepo(body);
 		console.log("New Course:\n", course);
 		res.status(200).send(course);
 	} catch (e) {
