@@ -14,7 +14,7 @@ mongoose.set('strictQuery', true);
 
 const connectDB = async () => {
 	try {
-		await mongoose.connect(process.env.DATABASE_URL, {dbName: "315m"});
+		await mongoose.connect(process.env.DATABASE_URL, {dbName: "315M"});
 		console.log("Connected to database");
 	} catch (e) {
 		console.log("Could not connect to database");
