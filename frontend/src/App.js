@@ -7,8 +7,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-// const urlCourses = '//localhost:8001/courses/';
-// const urlStudents = '//localhost:8001/students/';
+const urlCourses = process.env.URL_COURSES;
+const urlStudents = process.env.URL_STUDENTS;
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
