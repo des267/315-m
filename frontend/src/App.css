@@ -1,10 +1,55 @@
-.App {
-    text-align: center;
-    padding: 5vh 2vh;
+@media screen and (min-width: 300px) {
+    .App {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 5vw;
+        margin: 2vh;
+    }
+
+    .parentContainer {
+        margin: 2vw;
+    }
+
+    .parentContainer h1 {
+        text-align: center;
+    }
+
+    .coursesContainer {
+        display: flex;
+        flex-direction: column;
+        border-style: solid;
+        border-color: grey;
+        padding: 1vh 2vw;
+    }
 }
 
-.coursesContainer {
-    border-style: solid;
-    border-radius: 1px;
-    border-color: grey;
+@media screen and (min-width: 900px) {
+    .App {
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 5vw;
+    }
+
+    .parentContainer {
+        height: 80%;
+        flex: 1;
+        margin: 2vw;
+    }
+
+    .parentContainer h1 {
+        text-align: center;
+    }
+
+    .coursesContainer {
+        display: flex;
+        flex-direction: column;
+        border-style: solid;
+        border-color: grey;
+        height: 100%;
+        padding: 1vh 2vw;
+    }
 }

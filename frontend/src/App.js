@@ -7,8 +7,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-const urlCourses = '//localhost:8001/courses/';
-const urlStudents = '//localhost:8001/students/';
+// const urlCourses = '//localhost:8001/courses/';
+// const urlStudents = '//localhost:8001/students/';
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -142,18 +142,25 @@ function App() {
 
 	return (
 		<div className="App">
-			<div>
+			<div className={"parentContainer"}>
 				<h1>COURSE REGISTRATION</h1>
 				<div className={"coursesContainer"}>
 					<h6>Course List</h6>
-					<DropdownButton id="dropdown-basic-button" title={"Student: " + activeStudent.name}>
-						{students.map((student) => (
-							<Dropdown.Item id={student.id} href={"#/action-" + student.id} onClick={studentSelectHandler}>{student.name}</Dropdown.Item>
-						))}
+					<DropdownButton id="dropdown-basic-button" title={"Student: " + activeStudent.name} style={{marginBottom: "1vh"}}>
+						<Dropdown.Header>Select a student</Dropdown.Header>
+						<Dropdown.Menu style={{maxHeight: '50vh', overflowY: "auto"}}>
+							{students.map((student) => (
+								<Dropdown.Item id={student.id} href={"#/action-" + student.id}
+											   onClick={studentSelectHandler}>{student.name}</Dropdown.Item>
+							))}
+						</Dropdown.Menu>
 					</DropdownButton>
 					<Searchbar placeholder={"Search For Time"} handler={courseSearchHandler}/>
-					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false} handler={enrollHandler}/>
+					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false}
+								 handler={enrollHandler}/>
 				</div>
+			</div>
+			<div className={"parentContainer"}>
 				<h1>STUDENT INFORMATION</h1>
 				<div className={"coursesContainer"}>
 					<h6>Student List</h6>

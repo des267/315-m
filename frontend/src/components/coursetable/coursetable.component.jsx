@@ -9,22 +9,26 @@
 
 import Table from "react-bootstrap/Table";
 import CourseRow from "../courserow/courserow.component";
+import './coursetable.component.css';
 
 const CourseTable = ({ activeStudent, courses, isEnrolled, handler }) => {
 	return (
-		<Table striped bordered hover>
-			<thead>
+		<div className={"table"}>
+			<Table style={{outline: "red", borderStyle: "solid"}} striped bordered hover>
+				<thead style={{position: "sticky", top: "-1px"}}>
 				<th>id</th>
 				<th>Course Name</th>
 				<th>Department</th>
 				<th>Time of Day</th>
-			</thead>
-			<tbody>
+				<th></th>
+				</thead>
+				<tbody>
 				{courses.map(course => (
 					<CourseRow course={course} isEnrolled={isEnrolled} handler={handler}/>
 				))}
-			</tbody>
-		</Table>
+				</tbody>
+			</Table>
+		</div>
 	);
 };
 
