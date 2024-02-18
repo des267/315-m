@@ -12,7 +12,7 @@ import './searchbar.component.css';
 
 const Searchbar = ({placeholder, handler}) => {
 	return (
-		<input type="search" placeholder={placeholder} onChange={handler}/>
+		<input className={"searchbar"} type="search" placeholder={placeholder} onChange={handler}/>
 	);
 }
 

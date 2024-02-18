@@ -15,7 +15,7 @@ const CourseRow = ({ course, isEnrolled, handler }) => {
 
 	if (isEnrolled) {
 		variant = "danger";
-		placeholder = "Unroll";
+		placeholder = "Unenroll";
 	}
 	return (
 		<tr>
