@@ -1,3 +1,10 @@
 .App {
-  text-align: center;
+    text-align: center;
+    padding: 5vh 2vh;
+}
+
+.coursesContainer {
+    border-style: solid;
+    border-radius: 1px;
+    border-color: grey;
 }

@@ -2,6 +2,9 @@
  * coursetable.component.jsx
  *
  * Holds a list of courses.
+ *
+ * Author: Desmond Stular
+ * Date: February 17, 2024
  */
 
 import Table from "react-bootstrap/Table";

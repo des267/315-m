@@ -1,5 +1,13 @@
-import Button from "react-bootstrap/Button";
+/**
+ * courserow.component.jsx
+ *
+ * A component representing a row within one of the courses tables.
+ *
+ * Author: Desmond Stular
+ * February 17, 2024
+ */
 
+import Button from "react-bootstrap/Button";
 
 const CourseRow = ({ course, isEnrolled, handler }) => {
 	const { id, name, department, startTime } = course;
