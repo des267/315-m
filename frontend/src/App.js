@@ -7,8 +7,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-const urlCourses = process.env.URL_COURSES;
-const urlStudents = process.env.URL_STUDENTS;
+// const urlCourses = process.env.URL_COURSES;
+// const urlStudents = process.env.URL_STUDENTS;
+const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
+const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -20,7 +22,7 @@ function App() {
 	const [updateCounter, setUpdateCounter] = useState(0);
 	const [courseSearchInput, setCourseSearchInput] = useState("");
 	const [studentSearchInput, setStudentSearchInput] = useState("");
-	const [count, setCount] = useState(0);
+	//const [count, setCount] = useState(0);
 
 	//Timer that triggers database refresh every 10 seconds
 	// useEffect(() => {
@@ -67,15 +69,16 @@ function App() {
 	}, [updateCounter]);
 
 	useEffect(() => {
-		try {
-			const getStudent = async () => {
-				const response = await axios(urlStudents + activeStudentID);
+		const getStudent = async () => {
+			try {
+				const response = await axios(urlStudents + activeStudentID, {timeout: 60000});
 				setActiveStudent(response.data[0]);
-			};
-			getStudent();
-		} catch (e) {
-			console.log(e.message);
-		}
+			}
+			catch (e) {
+				console.log(e.message);
+			}
+		};
+		getStudent();
 	}, [activeStudentID]);
 
 	useEffect(() => {
