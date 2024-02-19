@@ -66,6 +66,7 @@ function App() {
 			}
 		};
 		getData();
+		console.log(refreshCount);
 	}, [updateCounter]);
 
 	useEffect(() => {
