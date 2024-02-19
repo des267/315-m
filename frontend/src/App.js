@@ -9,10 +9,6 @@ import Searchbar from "./components/searchbar/searchbar.component";
 
 const urlCourses = process.env.URL_COURSES;
 const urlStudents = process.env.URL_STUDENTS;
-// // console.log(urlCourses);
-// // console.log(urlStudents);
-// const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
-// const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -24,9 +20,11 @@ function App() {
 	const [updateCounter, setUpdateCounter] = useState(0);
 	const [courseSearchInput, setCourseSearchInput] = useState("");
 	const [studentSearchInput, setStudentSearchInput] = useState("");
+	const [loading, setLoading] = useState(true);
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
+		setLoading(true);
 		const getData = async () => {
 			try {
 				const response1 = await axios(urlStudents);
@@ -56,6 +54,7 @@ function App() {
 			}
 		};
 		getData();
+		setLoading(false);
 	}, [updateCounter]);
 
 	useEffect(() => {
@@ -174,7 +173,7 @@ function App() {
 					</DropdownButton>
 					<Searchbar placeholder={"Search For Time"} handler={courseSearchHandler}/>
 					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false}
-								 handler={enrollHandler}/>
+								 handler={enrollHandler} isLoading={loading}/>
 				</div>
 			</div>
 			<div className={"parentContainer"}>

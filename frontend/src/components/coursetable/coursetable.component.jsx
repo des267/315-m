@@ -9,9 +9,18 @@
 
 import Table from "react-bootstrap/Table";
 import CourseRow from "../courserow/courserow.component";
+import Spinner from 'react-bootstrap/Spinner';
 import './coursetable.component.css';
 
-const CourseTable = ({ activeStudent, courses, isEnrolled, handler }) => {
+const CourseTable = ({ courses, isEnrolled, handler, isLoading }) => {
+	// While table is loading, return spinner
+	if (isLoading) {
+		return (
+			<Spinner animation="border" role="status">
+				<span className="visually-hidden">Loading...</span>
+			</Spinner>
+		);
+	}
 	return (
 		<div className={"table"}>
 			<Table style={{outline: "red", borderStyle: "solid"}} striped bordered hover>
