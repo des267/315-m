@@ -7,8 +7,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-const urlCourses = process.env.URL_COURSES;
-const urlStudents = process.env.URL_STUDENTS;
+// const urlCourses = process.env.URL_COURSES;
+// const urlStudents = process.env.URL_STUDENTS;
+// console.log(urlCourses);
+// console.log(urlStudents);
+const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
+const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -48,6 +52,7 @@ function App() {
 				setActiveStudent(response3.data[0]);
 			} catch (e) {
 				console.log(e.message);
+				setUpdateCounter(updateCounter + 1);
 			}
 		};
 		getData();
