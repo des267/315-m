@@ -7,12 +7,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-// const urlCourses = process.env.URL_COURSES;
-// const urlStudents = process.env.URL_STUDENTS;
-// console.log(urlCourses);
-// console.log(urlStudents);
-const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
-const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
+const urlCourses = process.env.URL_COURSES;
+const urlStudents = process.env.URL_STUDENTS;
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -102,8 +98,12 @@ function App() {
 
 		// Update course and student in database; adds objects ids to each other
 		const updateCourseAndStudent = async () => {
-			const response1 = await axios.patch(urlCourses + courseID, newCourse);
-			const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+			try {
+				const response1 = await axios.patch(urlCourses + courseID, newCourse);
+				const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+			} catch (e) {
+				console.log(e.message);
+			}
 		}
 		updateCourseAndStudent();
 
@@ -124,8 +124,12 @@ function App() {
 
 		// Update objects in database
 		const updateCourseAndStudent = async () => {
-			const response1 = await axios.patch(urlCourses + courseID, newCourse);
-			const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+			try {
+				const response1 = await axios.patch(urlCourses + courseID, newCourse);
+				const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+			} catch (e) {
+				console.log(e.message);
+			}
 		}
 		updateCourseAndStudent();
 
