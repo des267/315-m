@@ -28,27 +28,31 @@ function App() {
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
 		const getData = async () => {
-			const response1 = await axios(urlStudents);
-			const response2 = await axios(urlCourses);
-			const response3 = await axios(urlStudents + activeStudentID);
+			try {
+				const response1 = await axios(urlStudents);
+				const response2 = await axios(urlCourses);
+				const response3 = await axios(urlStudents + activeStudentID);
 
-			// Sort list of students by name for dropdown display
-			response1.data.sort((a, b) => {
-				let fa = a.name.toLowerCase(),
-					fb = b.name.toLowerCase();
+				// Sort list of students by name for dropdown display
+				response1.data.sort((a, b) => {
+					let fa = a.name.toLowerCase(),
+						fb = b.name.toLowerCase();
 
-				if (fa < fb) {
-					return -1;
-				}
-				if (fa > fb) {
-					return 1;
-				}
-				return 0;
-			});
+					if (fa < fb) {
+						return -1;
+					}
+					if (fa > fb) {
+						return 1;
+					}
+					return 0;
+				});
 
-			setStudents(response1.data);
-			setCourses(response2.data);
-			setActiveStudent(response3.data[0]);
+				setStudents(response1.data);
+				setCourses(response2.data);
+				setActiveStudent(response3.data[0]);
+			} catch (e) {
+				console.log(e.message);
+			}
 		};
 		getData();
 	}, [updateCounter]);
