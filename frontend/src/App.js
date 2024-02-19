@@ -23,22 +23,22 @@ function App() {
 	const [count, setCount] = useState(0);
 
 	//Timer that triggers database refresh every 10 seconds
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			const counter = count + 1;
-			setCount(counter);
-		}, 1000);
-		if (count % 20 === 0) {
-			setUpdateCounter(updateCounter + 1);
-		}
-		return () => clearTimeout(timer);
-	}, [count]);
+	// useEffect(() => {
+	// 	const timer = setTimeout(() => {
+	// 		const counter = count + 1;
+	// 		setCount(counter);
+	// 	}, 1000);
+	// 	if (count % 20 === 0) {
+	// 		setUpdateCounter(updateCounter + 1);
+	// 	}
+	// 	return () => clearTimeout(timer);
+	// }, [count]);
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				const response1 = await axios(urlStudents);
+				const response1 = await axios(urlStudents, {timeout: 60000});
 				const response2 = await axios(urlCourses);
 				const response3 = await axios(urlStudents + activeStudentID);
 

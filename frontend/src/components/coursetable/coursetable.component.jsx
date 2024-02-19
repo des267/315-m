@@ -12,17 +12,17 @@ import CourseRow from "../courserow/courserow.component";
 import Spinner from 'react-bootstrap/Spinner';
 import './coursetable.component.css';
 
-const CourseTable = ({ courses, isEnrolled, handler, isLoading }) => {
+const CourseTable = ({ courses, isEnrolled, handler }) => {
 	// While table is loading, return spinner
-	if (courses.length === 0) {
-		return (
-			<div>
-				<Spinner animation="border" role="status">
-					<span className="visually-hidden">Loading...</span>
-				</Spinner>
-			</div>
-		);
-	}
+	// if (courses.length === 0) {
+	// 	return (
+	// 		<div>
+	// 			<Spinner animation="border" role="status">
+	// 				<span className="visually-hidden">Loading...</span>
+	// 			</Spinner>
+	// 		</div>
+	// 	);
+	// }
 	return (
 		<div className={"table"}>
 			<Table style={{outline: "red", borderStyle: "solid"}} striped bordered hover>
