@@ -21,6 +21,22 @@ function App() {
 	const [courseSearchInput, setCourseSearchInput] = useState("");
 	const [studentSearchInput, setStudentSearchInput] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [count, setCount] = useState(0);
+
+	//Timer that triggers database refresh every 10 seconds
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			const counter = count + 1;
+			setCount(counter);
+		}, 1000);
+		if (isLoading === true && count % 5 === 0) {
+			setUpdateCounter(updateCounter + 1);
+		}
+		else if (count % 20 === 0) {
+			setUpdateCounter(updateCounter + 1);
+		}
+		return () => clearTimeout(timer);
+	}, [count]);
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
@@ -48,21 +64,24 @@ function App() {
 				setStudents(response1.data);
 				setCourses(response2.data);
 				setActiveStudent(response3.data[0]);
+				setLoading(false);
 			} catch (e) {
 				console.log(e.message);
-				setUpdateCounter(updateCounter + 1);
 			}
 		};
 		getData();
-		setLoading(false);
 	}, [updateCounter]);
 
 	useEffect(() => {
-		const getStudent = async () => {
-			const response = await axios(urlStudents + activeStudentID);
-			setActiveStudent(response.data[0]);
-		};
-		getStudent();
+		try {
+			const getStudent = async () => {
+				const response = await axios(urlStudents + activeStudentID);
+				setActiveStudent(response.data[0]);
+			};
+			getStudent();
+		} catch (e) {
+			console.log(e.message);
+		}
 	}, [activeStudentID]);
 
 	useEffect(() => {
@@ -75,6 +94,7 @@ function App() {
 		setEnrolledCourses(filteredEnrolled);
 	}, [activeStudent, courseSearchInput, studentSearchInput]);
 
+	// Checks if course has time conflict with other courses student is taking
 	const hasTimeConflict = (course) => {
 		for (const taken of enrolledCourses) {
 			if (taken.startTime === course.startTime) {
@@ -172,8 +192,7 @@ function App() {
 						</Dropdown.Menu>
 					</DropdownButton>
 					<Searchbar placeholder={"Search For Time"} handler={courseSearchHandler}/>
-					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false}
-								 handler={enrollHandler} isLoading={loading}/>
+					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false} handler={enrollHandler} isLoading={loading}/>
 				</div>
 			</div>
 			<div className={"parentContainer"}>
@@ -181,7 +200,7 @@ function App() {
 				<div className={"coursesContainer"}>
 					<h6>Student List</h6>
 					<Searchbar placeholder={"Search For Time"} handler={studentSearchHandler}/>
-					<CourseTable courses={enrolledCourses} activeStudent={activeStudent} isEnrolled={true} handler={unEnrollHandler}/>
+					<CourseTable courses={enrolledCourses} activeStudent={activeStudent} isEnrolled={true} handler={unEnrollHandler} isLoading={loading}/>
 				</div>
 			</div>
 		</div>
