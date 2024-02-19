@@ -7,8 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
-// const urlCourses = process.env.URL_COURSES;
-// const urlStudents = process.env.URL_STUDENTS;
+// Backend server links
 const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
 const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
 
@@ -22,25 +21,26 @@ function App() {
 	const [updateCounter, setUpdateCounter] = useState(0);
 	const [courseSearchInput, setCourseSearchInput] = useState("");
 	const [studentSearchInput, setStudentSearchInput] = useState("");
-	//const [count, setCount] = useState(0);
+	const [refreshCount, setRefreshCount] = useState(0);
 
-	//Timer that triggers database refresh every 10 seconds
-	// useEffect(() => {
-	// 	const timer = setTimeout(() => {
-	// 		const counter = count + 1;
-	// 		setCount(counter);
-	// 	}, 1000);
-	// 	if (count % 20 === 0) {
-	// 		setUpdateCounter(updateCounter + 1);
-	// 	}
-	// 	return () => clearTimeout(timer);
-	// }, [count]);
+	//Timer that triggers database refresh every 30 seconds
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			const counter = refreshCount + 1;
+			setRefreshCount(counter);
+		}, 1000);
+		// Reload database every 30 seconds
+		if (refreshCount % 30 === 0) {
+			setUpdateCounter(updateCounter + 1);
+		}
+		return () => clearTimeout(timer);
+	}, [refreshCount]);
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
 		const getData = async () => {
 			try {
-				const response1 = await axios(urlStudents, {timeout: 60000});
+				const response1 = await axios(urlStudents);
 				const response2 = await axios(urlCourses);
 				const response3 = await axios(urlStudents + activeStudentID);
 
@@ -71,7 +71,7 @@ function App() {
 	useEffect(() => {
 		const getStudent = async () => {
 			try {
-				const response = await axios(urlStudents + activeStudentID, {timeout: 60000});
+				const response = await axios(urlStudents + activeStudentID);
 				setActiveStudent(response.data[0]);
 			}
 			catch (e) {
