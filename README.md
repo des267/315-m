@@ -19,6 +19,7 @@ After selecting a student, a list of courses they can enroll in will be displaye
 
 Within the course registration panel, a user can click on a green button labelled "enroll" to enroll the student in the course that is within the same row. If a user wishes to unenroll a student from a course, in the student information panel they can click on a red button labelled "Unenroll" to remove the student from the course within the same row.
 
+Within each container is a searchbar that will filter courses based on their start times. This is useful if the user wishes to find courses that fit within the schedule of the student or possibly have a matching time.
 
 ***** **_NOTICE:_** *****
 
