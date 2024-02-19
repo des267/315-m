@@ -20,7 +20,6 @@ function App() {
 	const [updateCounter, setUpdateCounter] = useState(0);
 	const [courseSearchInput, setCourseSearchInput] = useState("");
 	const [studentSearchInput, setStudentSearchInput] = useState("");
-	const [loading, setLoading] = useState(true);
 	const [count, setCount] = useState(0);
 
 	//Timer that triggers database refresh every 10 seconds
@@ -29,10 +28,7 @@ function App() {
 			const counter = count + 1;
 			setCount(counter);
 		}, 1000);
-		if (isLoading === true && count % 5 === 0) {
-			setUpdateCounter(updateCounter + 1);
-		}
-		else if (count % 20 === 0) {
+		if (count % 20 === 0) {
 			setUpdateCounter(updateCounter + 1);
 		}
 		return () => clearTimeout(timer);
@@ -40,7 +36,6 @@ function App() {
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
-		setLoading(true);
 		const getData = async () => {
 			try {
 				const response1 = await axios(urlStudents);
@@ -64,7 +59,6 @@ function App() {
 				setStudents(response1.data);
 				setCourses(response2.data);
 				setActiveStudent(response3.data[0]);
-				setLoading(false);
 			} catch (e) {
 				console.log(e.message);
 			}
@@ -192,7 +186,7 @@ function App() {
 						</Dropdown.Menu>
 					</DropdownButton>
 					<Searchbar placeholder={"Search For Time"} handler={courseSearchHandler}/>
-					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false} handler={enrollHandler} isLoading={loading}/>
+					<CourseTable courses={filteredCourses} activeStudent={activeStudent} isEnrolled={false} handler={enrollHandler}/>
 				</div>
 			</div>
 			<div className={"parentContainer"}>
@@ -200,7 +194,7 @@ function App() {
 				<div className={"coursesContainer"}>
 					<h6>Student List</h6>
 					<Searchbar placeholder={"Search For Time"} handler={studentSearchHandler}/>
-					<CourseTable courses={enrolledCourses} activeStudent={activeStudent} isEnrolled={true} handler={unEnrollHandler} isLoading={loading}/>
+					<CourseTable courses={enrolledCourses} activeStudent={activeStudent} isEnrolled={true} handler={unEnrollHandler}/>
 				</div>
 			</div>
 		</div>

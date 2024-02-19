@@ -14,11 +14,13 @@ import './coursetable.component.css';
 
 const CourseTable = ({ courses, isEnrolled, handler, isLoading }) => {
 	// While table is loading, return spinner
-	if (isLoading) {
+	if (courses.length === 0) {
 		return (
-			<Spinner animation="border" role="status">
-				<span className="visually-hidden">Loading...</span>
-			</Spinner>
+			<div>
+				<Spinner animation="border" role="status">
+					<span className="visually-hidden">Loading...</span>
+				</Spinner>
+			</div>
 		);
 	}
 	return (
