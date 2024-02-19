@@ -10,8 +10,6 @@ import Searchbar from "./components/searchbar/searchbar.component";
 // Backend server links
 const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
 const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
-// const urlCourses = process.env.URL_COURSES;
-// const urlStudents = process.env.URL_STUDENTS;
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -40,11 +38,6 @@ function App() {
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
-		// Reset state variables to clear tables and show spinners
-		setActiveStudent({});
-		setStudents([]);
-		setCourses([]);
-
 		const getData = async () => {
 			try {
 				const response1 = await axios(urlStudents);
@@ -70,6 +63,10 @@ function App() {
 				setActiveStudent(response3.data[0]);
 			} catch (e) {
 				console.log(e.message);
+				// Reset state variables to clear tables and show spinners
+				setActiveStudent({});
+				setStudents([]);
+				setCourses([]);
 			}
 		};
 		getData();
@@ -129,14 +126,14 @@ function App() {
 			try {
 				const response1 = await axios.patch(urlCourses + courseID, newCourse);
 				const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+
+				// Increment counter to load new database courses
+				setUpdateCounter(updateCounter + 1);
 			} catch (e) {
 				console.log(e.message);
 			}
 		}
 		updateCourseAndStudent();
-
-		// Increment counter to load new database courses
-		setUpdateCounter(updateCounter + 1);
 	}
 
 	// If user clicks the un-enroll button, removes student from course
@@ -155,14 +152,14 @@ function App() {
 			try {
 				const response1 = await axios.patch(urlCourses + courseID, newCourse);
 				const response2 = await axios.patch(urlStudents + activeStudentID, newStudent);
+
+				// Increment counter to pull new data from database
+				setUpdateCounter(updateCounter + 1);
 			} catch (e) {
 				console.log(e.message);
 			}
 		}
 		updateCourseAndStudent();
-
-		// Increment counter to pull new data from database
-		setUpdateCounter(updateCounter + 1);
 	}
 
 	// If the user changes the student from dropdown

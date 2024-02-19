@@ -9,6 +9,7 @@
 
     .parentContainer {
         margin: 2vw;
+        padding-bottom: 4vh;
     }
 
     .parentContainer h1 {

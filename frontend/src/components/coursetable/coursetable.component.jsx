@@ -16,7 +16,7 @@ const CourseTable = ({ activeStudent, courses, isEnrolled, handler }) => {
 	// If data not loaded from server, put loading spinners
 	if (courses.length === 0 && Object.keys(activeStudent).length === 0) {
 		return (
-			<div>
+			<div style={{justifyContent: "center"}}>
 				<Spinner animation="border" role="status">
 					<span className="visually-hidden">Loading...</span>
 				</Spinner>
