@@ -25,14 +25,14 @@ function App() {
 	const [studentSearchInput, setStudentSearchInput] = useState("");
 	const [refreshCount, setRefreshCount] = useState(0);
 
-	//Timer that triggers database refresh every 30 seconds
+	// Timer that triggers database refresh every 10 seconds
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			const counter = refreshCount + 1;
 			setRefreshCount(counter);
 		}, 1000);
-		// Reload database every 30 seconds
-		if (refreshCount % 30 === 0) {
+		// Reload database every 10 seconds
+		if (refreshCount % 10 === 0) {
 			setUpdateCounter(updateCounter + 1);
 		}
 		return () => clearTimeout(timer);
@@ -40,6 +40,11 @@ function App() {
 
 	// Called at app start and whenever a patch is processed
 	useEffect(() => {
+		// Reset state variables to clear tables and show spinners
+		setActiveStudent({});
+		setStudents([]);
+		setCourses([]);
+
 		const getData = async () => {
 			try {
 				const response1 = await axios(urlStudents);
