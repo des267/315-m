@@ -8,8 +8,10 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Searchbar from "./components/searchbar/searchbar.component";
 
 // Backend server links
-const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
-const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
+// const urlCourses = 'https://three15-midterm-backend.onrender.com/courses/';
+// const urlStudents = 'https://three15-midterm-backend.onrender.com/students/';
+const urlCourses = process.env.URL_COURSES;
+const urlStudents = process.env.URL_STUDENTS;
 
 function App() {
 	const [activeStudentID, setActiveStudentID] = useState(1);
@@ -66,8 +68,7 @@ function App() {
 			}
 		};
 		getData();
-		console.log(refreshCount);
-	}, [updateCounter]);
+		}, [updateCounter]);
 
 	useEffect(() => {
 		const getStudent = async () => {
